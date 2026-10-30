@@ -22,20 +22,24 @@ TYPE_NOTES = {
 
 # (indicator, source, status, where)
 INDICATORS = [
-    ("Actual vs expected demand", "Si / Burgos", "✅ Built", "Overview"),
-    ("Power surge", "Slide 6", "✅ Built", "Overview, Events"),
-    ("Sustained load growth / running high", "Slide 6", "✅ Built", "Overview, Events"),
-    ("Appliance status (OK / Check)", "Slide 6", "✅ Built", "Appliances"),
-    ("Excess energy (kWh) and cost", "Slide 3", "✅ Built", "Summary cards"),
-    ("Explain each alert + possible harmless reasons", "Burgos", "✅ Built", "Events"),
-    ("Missing or stuck meter data", "Burgos (suspicious readings)", "✅ Built", "Data quality"),
-    ("Event-based precision, recall, latency", "Si", "✅ Built (simulated data)", "Coverage & checks"),
-    ("Explained vs unexplained activity", "Open question 1", "🟡 Partial: known-event list only", "Events"),
-    ("Appliance behaving differently (shape / rhythm)", "Slide 6", "🟡 Partial: detected, not labeled", "Events"),
-    ("Home deviates from neighbors", "Slide 6", "🟡 Partial: chart + callout", "Neighborhood"),
-    ("Appliance running nonstop / at odd hours", "Slide 6", "⬜ Planned", "-"),
-    ("Weather / occupancy context for explanations", "Open question 1", "⬜ Planned", "-"),
-    ("Peak-demand event counts", "Slide 6", "⬜ Planned", "-"),
+    ("Actual vs expected demand", "Si / Burgos", "Built", "Overview"),
+    ("Power surge", "Slide 6", "Built", "Overview, Events"),
+    ("Sustained load growth / running high", "Slide 6", "Built", "Overview, Events"),
+    ("Appliance status (OK / Check)", "Slide 6", "Built", "Appliances"),
+    ("Excess energy (kWh) and cost", "Slide 3", "Built", "Summary cards"),
+    ("Explain each alert + possible harmless reasons", "Burgos", "Built", "Events"),
+    ("Missing or stuck meter data", "Burgos (suspicious readings)", "Built", "Data quality"),
+    ("Event-based precision, recall, latency", "Si", "Built (simulated data)", "Detection errors"),
+    ("Zero-shot detection (train on other homes, score an unseen home)", "Si", "Built (simulated data)", "Detection errors"),
+    ("False positive / false negative breakdown", "Open question", "Built (simulated data)", "Detection errors"),
+    ("Cold start: performance vs days of history", "Si (zero-shot)", "Built (simulated data)", "Detection errors"),
+    ("Explained vs unexplained activity", "Open question 1", "Partial: known-event list only", "Events"),
+    ("Appliance behaving differently (shape / rhythm)", "Slide 6", "Partial: detected, not labeled", "Events"),
+    ("Home deviates from neighbors", "Slide 6", "Partial: chart + callout", "Neighborhood"),
+    ("Appliance running nonstop / at odd hours", "Slide 6", "Planned", "-"),
+    ("Weather / occupancy context for explanations", "Open question 1", "Planned", "-"),
+    ("Peak-demand event counts", "Slide 6", "Planned", "-"),
+    ("Real DERConnect data loader", "Project", "Planned: needs data access", "-"),
 ]
 
 

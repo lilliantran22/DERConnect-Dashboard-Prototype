@@ -12,10 +12,11 @@ streamlit run app.py
 
 ## Structure
 ```
-app.py                 # Streamlit UI (7 tabs)
+app.py                 # Streamlit UI (8 tabs)
 .streamlit/config.toml # light theme
 src/simulate.py        # simulated home: 5 injected anomaly types, a known benign event, 2 data problems, peer homes
-src/detect.py          # baseline detector (time-of-week median + robust z) + event-based evaluation
+src/detect.py          # per-home baseline detector, pluggable model hook, event-based evaluation, false-alarm list
+src/zeroshot.py        # zero-shot detector: AR trained on other homes, applied to an unseen home (placeholder model)
 src/quality.py         # missing-data / stuck-meter checks, completeness
 src/indicators.py      # classify events (Unexplained / Explained / Data issue), status, KPIs, explanations
 src/knowledge.py       # anomaly guide content, indicator coverage table, example charts
@@ -31,3 +32,9 @@ should be resampled to this in `load_derconnect()`. The schema is an assumption 
 ## Team questions this prototype addresses
 1. Unusual reading vs unusual activity: every alert is bucketed as Data issue / Explained / Unexplained; only Unexplained drives the status banner.
 2. Covering all unusual activity: the Coverage & checks tab lists every anomaly type and slide-6 indicator as built, partial, or planned.
+
+## Zero-shot and error analysis
+- `src/zeroshot.py` trains an AR model on simulated peer homes and scores a held-out home with no refitting (Si et al.).
+  AR is a placeholder; any class with `fit(train_df)` and `expected(series)` can replace it.
+- The Detection errors tab shows false positives and negatives, a sensitivity trade-off, results by anomaly type,
+  and a cold-start comparison against the per-home baseline. These use simulated ground truth only.

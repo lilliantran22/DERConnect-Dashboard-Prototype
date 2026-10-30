@@ -32,7 +32,7 @@ def inject_css():
 
 
 def hero(title, sub):
-    st.markdown(f"<div class='hero'><h1>⚡ {title}</h1><p>{sub}</p></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='hero'><h1>{title}</h1><p>{sub}</p></div>", unsafe_allow_html=True)
 
 
 def banner(status):

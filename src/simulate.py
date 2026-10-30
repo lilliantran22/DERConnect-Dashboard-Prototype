@@ -70,12 +70,21 @@ def simulate_home(name="My home", seed=0, days=14, inject=True, scale=1.0, end=N
             pd.DataFrame(context, columns=["start", "end", "label"]))
 
 
-def simulate_peers(n=6, days=14, end=None):
-    """Daily kWh per peer home (normal behaviour only) for the neighborhood view."""
-    out = {}
+def simulate_training(n=6, days=14, end=None):
+    """Normal-behaviour homes used to train the zero-shot model (never include the home being scored)."""
+    frames = []
     for k in range(n):
         d, _, _ = simulate_home(f"Home {k + 1}", seed=100 + k, days=days, inject=False,
-                             scale=float(np.random.default_rng(k).uniform(0.8, 1.25)), end=end)
-        t = d.groupby(["timestamp"])["kw"].sum() * 0.25
-        out[f"Home {k + 1}"] = t.resample("D").sum()
-    return pd.DataFrame(out)
+                                scale=float(np.random.default_rng(k).uniform(0.8, 1.25)), end=end)
+        frames.append(d)
+    return pd.concat(frames, ignore_index=True)
+
+
+def peers_daily(train_df):
+    t = train_df.groupby(["building_id", "timestamp"])["kw"].sum().mul(0.25).unstack("building_id")
+    return t.resample("D").sum()
+
+
+def simulate_peers(n=6, days=14, end=None):
+    """Daily kWh per peer home for the neighborhood view."""
+    return peers_daily(simulate_training(n, days, end))
